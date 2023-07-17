@@ -1,1 +1,1 @@
-from models import Gallery
+from .gallery import Gallery

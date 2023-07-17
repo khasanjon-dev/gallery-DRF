@@ -1,2 +1,2 @@
-from addition import Favorite
-from user import UserManager, User
+from .user import User
+from .addition import Favorite
