@@ -10,3 +10,6 @@ admin:
 
 reindex:
 	python manage.py search_index --rebuild
+
+add_users:
+	python3 manage.py loaddata user.yaml
