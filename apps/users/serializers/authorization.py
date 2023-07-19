@@ -92,3 +92,33 @@ class RegisterSerializer(MainSerializer):
         user.set_password(password)
         user.is_active = True
         user.save()
+
+
+class ChangePhoneSerializer(MainSerializer):
+    phone = CharField(max_length=12)
+
+    def validate(self, attrs):
+        phone = attrs.get('phone')
+        valid, msg = is_phone_number_valid(phone)
+        if not valid:
+            raise ValidationError("Telefon raqam to'g'ri yozing!")
+        c_p = generate_correct_phone_number(msg)
+        attrs['phone'] = c_p
+        return attrs
+
+
+class ChangePhoneConfirmSerializer(MainSerializer):
+    phone = CharField(max_length=12)
+    code = CharField(max_length=6)
+
+    def validate(self, attrs):
+        phone = attrs.get('phone')
+        code = attrs.get('code')
+        if not phone or not code:
+            raise ValidationError('Phone va code kiritilishi shart!')
+        valid, msg = is_phone_number_valid(phone)
+        if not valid:
+            raise ValidationError('Telefon raqam xato kiritilgan!')
+        if code != cache.get(phone):
+            raise ValidationError('Kod xato!')
+        return attrs

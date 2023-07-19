@@ -8,7 +8,8 @@ from rest_framework.viewsets import ModelViewSet
 from root import settings
 from shared.django_restframework.permission import IsOwner
 from users.models import User
-from users.serializers.authorization import CodeSendSerializer, CodeCheckSerializer, RegisterSerializer
+from users.serializers.authorization import CodeSendSerializer, CodeCheckSerializer, RegisterSerializer, \
+    ChangePhoneSerializer, ChangePhoneConfirmSerializer
 from users.serializers.user import UserModelSerializer
 from utils.addtion import generate_code
 
@@ -88,3 +89,61 @@ class UserModelViewSet(ModelViewSet):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data)
+
+    @action(methods=['post'], detail=False, permission_classes=(IsOwner,), serializer_class=ChangePhoneSerializer)
+    def change_phone(self, request):
+        """
+        ## Telefon raqamni change qilish uchun api yangi telefon raqam yuboriladi
+        ```
+        {
+            "phone": "998901001010"
+        }
+        ```
+        """
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        phone = serializer.data['phone']
+        try:
+            code = generate_code()
+            user, created = User.objects.get_or_create(phone=phone)
+            cache.set(user.phone, code, timeout=settings.REDIS_TIMEOUT)
+            print(cache.get(user.phone))
+            # TODO send phone code function
+            # ...
+        except Exception as e:
+            detail = {
+                'error': 'Sms yuborishda xatolik yuz berdi !',
+                'detail': str(e)
+            }
+            return Response(detail, status.HTTP_400_BAD_REQUEST)
+        detail = {
+            'message': 'Sms successfully send!'
+        }
+        return Response(detail)
+
+    @action(methods=['post'], detail=False, permission_classes=(IsOwner,),
+            serializer_class=ChangePhoneConfirmSerializer)
+    def change_phone_confirm(self, request):
+        """
+        ```
+        {
+            "phone": "998901001010",
+            "code": "123456"
+        }
+        ```
+        """
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        phone = serializer.data['phone']
+        if User.objects.filter(phone=phone).exists():
+            detail = {
+                'message': 'Bunday raqam mavjud!'
+            }
+            return Response(detail, status.HTTP_400_BAD_REQUEST)
+        User.objects.filter(phone=request.user.phone).update(phone=phone)
+        detail = {
+            'message': 'Successfully changed!'
+        }
+        return Response(detail)
+
+    @action(methods=['post'], detail=False, )
