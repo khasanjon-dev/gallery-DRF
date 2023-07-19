@@ -122,3 +122,48 @@ class ChangePhoneConfirmSerializer(MainSerializer):
         if code != cache.get(phone):
             raise ValidationError('Kod xato!')
         return attrs
+
+
+class PasswordResetSerializer(MainSerializer):
+    phone = CharField(max_length=12)
+    password = CharField(max_length=100)
+
+    def validate(self, attrs):
+        phone = attrs.get('phone')
+        password = attrs.get('password')
+        if not phone or not password:
+            raise ValidationError('Raqam va parol kiritilishi shart!')
+        if len(password) < 5:
+            raise ValidationError("Parol kamida 5 ta belgidan iborat bo'lishi kerak")
+        valid, msg = is_phone_number_valid(phone)
+        if not valid:
+            raise ValidationError("Telefon raqam xato kiritilgan!")
+        user = self.validate_phone_exists(phone)
+        self.save_user(user, password)
+
+        return attrs
+
+    @staticmethod
+    def save_user(user, password):
+        user.set_password(password)
+        user.save()
+
+
+class CodeSendResetPasswordSerializer(MainSerializer):
+    phone = CharField(max_length=12)
+
+    def validate(self, attrs):
+        phone = attrs.get('phone')
+        valid, msg = is_phone_number_valid(phone)
+        if not valid:
+            raise ValidationError("Telefon raqam xato kiritilgan!")
+        c_p = generate_correct_phone_number(msg)
+        self.validate_phone_exists(c_p)
+        attrs['phone'] = c_p
+        return attrs
+
+    @staticmethod
+    def validate_phone_exists(phone):
+        user = User.objects.filter(phone=phone, is_active=True)
+        if not user:
+            raise ValidationError("Bu raqam ro'yxatdan o'tmagan!")

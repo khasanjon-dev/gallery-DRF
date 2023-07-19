@@ -9,7 +9,7 @@ from root import settings
 from shared.django_restframework.permission import IsOwner
 from users.models import User
 from users.serializers.authorization import CodeSendSerializer, CodeCheckSerializer, RegisterSerializer, \
-    ChangePhoneSerializer, ChangePhoneConfirmSerializer
+    ChangePhoneSerializer, ChangePhoneConfirmSerializer, CodeSendResetPasswordSerializer, PasswordResetSerializer
 from users.serializers.user import UserModelSerializer
 from utils.addtion import generate_code
 
@@ -146,4 +146,56 @@ class UserModelViewSet(ModelViewSet):
         }
         return Response(detail)
 
-    @action(methods=['post'], detail=False, )
+    @action(methods=['post'], detail=False, permission_classes=(AllowAny,),
+            serializer_class=CodeSendResetPasswordSerializer)
+    def reset_password_send_code(self, request):
+        """
+        ## Kod yuborilishi uchun phoen yuborilishi kerak!
+        ## qaysi raqam paroli tiklash kerak bo'lsa o'sha yuboriladi!
+        ```
+        {
+            "phone": "998901001010"
+        }
+        ```
+        """
+        serializer = CodeSendResetPasswordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)  # noqa
+        phone = serializer.data.get('phone', None)
+
+        try:
+            code = generate_code()
+            user, created = User.objects.get_or_create(phone=phone)
+            cache.set(user.phone, code, timeout=settings.REDIS_TIMEOUT)
+            print(cache.get(user.phone))
+            # TODO send phone code function
+            # ...
+        except Exception as e:
+            detail = {
+                'error': 'Sms yuborishda xatolik yuz berdi !',
+                'detail': str(e)
+            }
+            return Response(detail, status.HTTP_400_BAD_REQUEST)
+        detail = {
+            'message': 'Sms successfully send!'
+        }
+        return Response(detail)
+
+    @action(methods=['post'], detail=False, permission_classes=(AllowAny,), serializer_class=PasswordResetSerializer)
+    def reset_password(self, request):
+        """
+        ## parol tiklashdan oldin quyidagi apilarga so'rov yuborish kerak
+        ## users/reset_password_send_code
+        ## users/check_code
+        ```
+        {
+            "phone": "998901001010",
+            "password": "12345"
+        }
+        ```
+        """
+        serializer = PasswordResetSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        detail = {
+            'message': 'Password successfully changed!'
+        }
+        return Response(detail)
