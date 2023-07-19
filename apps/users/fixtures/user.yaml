@@ -1,0 +1,121 @@
+- model: users.user
+  pk: 1
+  fields:
+    image: null
+    first_name: Khasan
+    last_name: Mamadaliyev
+    email: khasanjon.eng@gmail.com
+    phone: 998901001010
+    is_staff: true
+    is_active: true
+    is_superuser: true
+
+- model: users.user
+  pk: 2
+  fields:
+    image: null
+    first_name: Jane
+    last_name: Smith
+    email: jane.smith@example.com
+    phone: 998901001012
+    is_staff: false
+    is_active: true
+    is_superuser: false
+
+- model: users.user
+  pk: 3
+  fields:
+    image: null
+    first_name: Michael
+    last_name: Johnson
+    email: michael.johnson@example.com
+    phone: 998901001013
+    is_staff: false
+    is_active: true
+    is_superuser: false
+
+- model: users.user
+  pk: 4
+  fields:
+    image: null
+    first_name: Emily
+    last_name: Anderson
+    email: emily.anderson@example.com
+    phone: 998901001014
+    is_staff: false
+    is_active: true
+    is_superuser: false
+
+- model: users.user
+  pk: 5
+  fields:
+    image: null
+    first_name: William
+    last_name: Brown
+    email: william.brown@example.com
+    phone: 998901001015
+    is_staff: false
+    is_active: true
+    is_superuser: false
+
+- model: users.user
+  pk: 6
+  fields:
+    image: null
+    first_name: Olivia
+    last_name: Garcia
+    email: olivia.garcia@example.com
+    phone: 998901001016
+    is_staff: false
+    is_active: true
+    is_superuser: false
+
+- model: users.user
+  pk: 7
+  fields:
+    image: null
+    first_name: James
+    last_name: Lee
+    email: james.lee@example.com
+    phone: 998901001017
+    is_staff: false
+    is_active: true
+    is_superuser: false
+
+
+
+- model: users.user
+  pk: 8
+  fields:
+    image: null
+    first_name: Emma
+    last_name: Martinez
+    email: emma.martinez@example.com
+    phone: 998901001018
+    is_staff: false
+    is_active: true
+    is_superuser: false
+
+- model: users.user
+  pk: 9
+  fields:
+    image: null
+    first_name: John
+    last_name: Smith
+    email: khasanjon@gmail.com
+    phone: 998901001019
+    is_staff: false
+    is_active: true
+    is_superuser: false
+
+- model: users.user
+  pk: 10
+  fields:
+    image: null
+    first_name: Jane
+    last_name: Smith
+    email: jane.smith@example.com
+    phone: 998901001020
+    is_staff: false
+    is_active: true
+    is_superuser: false
