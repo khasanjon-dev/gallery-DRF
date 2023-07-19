@@ -13,10 +13,9 @@ class UserModelSerializer(ModelSerializer):
         fields = (
             'first_name',
             'last_name',
-            'username',
             'phone',
             'email',
-            'photo',
+            'image',
             'password'
         )
 

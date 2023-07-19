@@ -41,12 +41,13 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     image = ImageField(upload_to='images/users', null=True, blank=True)
-    first_name = CharField('first name', max_length=150)
+    first_name = CharField('first name', max_length=150, null=True, blank=True)
     last_name = CharField('last name', max_length=150, null=True, blank=True)
     email = EmailField(max_length=250, unique=True, null=True, blank=True)
     phone = CharField(max_length=12, unique=True)
     is_staff = BooleanField('staff status', default=False)
     is_active = BooleanField('active', default=False)
+    is_superuser = BooleanField('superuser', default=False)
 
     objects = CustomUserManager()
     USERNAME_FIELD = 'phone'

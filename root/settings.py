@@ -109,7 +109,6 @@ REST_FRAMEWORK = {
     )
 }
 
-
 LOCATION_REDIS = os.getenv('REDIS_URL') + '/1'
 CACHES = {
     "default": {
@@ -121,3 +120,5 @@ CACHES = {
         "KEY_PREFIX": "gallery"
     }
 }
+
+REDIS_TIMEOUT = int(os.getenv('REDIS_TIMEOUT'))

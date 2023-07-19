@@ -2,4 +2,5 @@ from random import randint
 
 
 def generate_code():
-    return randint(100000, 99999)
+    code = randint(100000, 999999)
+    return str(code)
