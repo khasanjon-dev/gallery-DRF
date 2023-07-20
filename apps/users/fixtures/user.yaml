@@ -10,6 +10,7 @@
     is_active: true
     is_superuser: true
     password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
   pk: 2
@@ -23,6 +24,7 @@
     is_active: true
     is_superuser: false
     password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
   pk: 3
@@ -36,6 +38,7 @@
     is_active: true
     is_superuser: false
     password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
   pk: 4
@@ -49,6 +52,7 @@
     is_active: true
     is_superuser: false
     password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
   pk: 5
@@ -62,6 +66,7 @@
     is_active: true
     is_superuser: false
     password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
   pk: 6
@@ -75,6 +80,7 @@
     is_active: true
     is_superuser: false
     password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
   pk: 7
@@ -88,6 +94,7 @@
     is_active: true
     is_superuser: false
     password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    created_at: 2023-07-20 09:44:24.126695 +00:00
 
 
 
@@ -103,6 +110,7 @@
     is_active: true
     is_superuser: false
     password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
   pk: 9
@@ -116,6 +124,7 @@
     is_active: true
     is_superuser: false
     password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
   pk: 10
@@ -129,3 +138,4 @@
     is_active: true
     is_superuser: false
     password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    created_at: 2023-07-20 09:44:24.126695 +00:00
