@@ -1,7 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import PermissionsMixin
-from django.db.models import CharField, ImageField, EmailField, BooleanField
+from django.db.models import CharField, ImageField, EmailField, BooleanField, DateTimeField
 
 
 class CustomUserManager(BaseUserManager):
@@ -48,6 +48,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = BooleanField('staff status', default=False)
     is_active = BooleanField('active', default=False)
     is_superuser = BooleanField('superuser', default=False)
+
+    updated_at = DateTimeField(auto_now=True, null=True)
+    created_at = DateTimeField(auto_now_add=True)
 
     objects = CustomUserManager()
     USERNAME_FIELD = 'phone'
