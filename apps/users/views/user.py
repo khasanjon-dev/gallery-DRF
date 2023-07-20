@@ -10,7 +10,7 @@ from shared.django_restframework.permission import IsOwner
 from users.models import User
 from users.serializers.authorization import CodeSendSerializer, CodeCheckSerializer, RegisterSerializer, \
     ChangePhoneSerializer, ChangePhoneConfirmSerializer, CodeSendResetPasswordSerializer, PasswordResetSerializer
-from users.serializers.user import UserModelSerializer
+from users.serializers.user import UserModelSerializer, UserUpdateModelSerializer
 from utils.addtion import generate_code
 
 
@@ -19,6 +19,11 @@ class UserModelViewSet(ModelViewSet):
     serializer_class = UserModelSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwner]
     ordering = ['-date_joined']
+
+    def get_serializer_class(self):
+        if self.action in ['update', 'partial_update']:
+            return UserUpdateModelSerializer
+        return super().get_serializer_class()
 
     @action(methods=['post'], detail=False, permission_classes=(AllowAny,), serializer_class=CodeSendSerializer)
     def send_code(self, request):
