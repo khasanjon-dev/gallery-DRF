@@ -1,7 +1,7 @@
 from django.core.cache import cache
 from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -88,12 +88,15 @@ class UserModelViewSet(ModelViewSet):
 
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status.HTTP_201_CREATED)
 
-    @action(methods=['post'], detail=False, permission_classes=(IsOwner,), serializer_class=ChangePhoneSerializer)
+    @action(methods=['post'], detail=False, permission_classes=(IsOwner, IsAuthenticated),
+            serializer_class=ChangePhoneSerializer)
     def change_phone(self, request):
         """
-        ## Telefon raqamni change qilish uchun api yangi telefon raqam yuboriladi
+        ## Yangi telefon raqam yuboriladi
+        ## userga raqamiga tasdiqlash kodi yuboriladi
+        ## Bundan kegin /users/change_phone_confirm api ga yuboriladi
         ```
         {
             "phone": "998901001010"
@@ -105,9 +108,8 @@ class UserModelViewSet(ModelViewSet):
         phone = serializer.data['phone']
         try:
             code = generate_code()
-            user, created = User.objects.get_or_create(phone=phone)
-            cache.set(user.phone, code, timeout=settings.REDIS_TIMEOUT)
-            print(cache.get(user.phone))
+            cache.set(phone, code, timeout=settings.REDIS_TIMEOUT)
+            print(cache.get(phone))
             # TODO send phone code function
             # ...
         except Exception as e:
@@ -121,10 +123,11 @@ class UserModelViewSet(ModelViewSet):
         }
         return Response(detail)
 
-    @action(methods=['post'], detail=False, permission_classes=(IsOwner,),
+    @action(methods=['post'], detail=False, permission_classes=(IsOwner, IsAuthenticated),
             serializer_class=ChangePhoneConfirmSerializer)
     def change_phone_confirm(self, request):
         """
+        ## yangi telefon raqam va tasdiqlash kodi yuboriladi
         ```
         {
             "phone": "998901001010",
@@ -164,7 +167,7 @@ class UserModelViewSet(ModelViewSet):
 
         try:
             code = generate_code()
-            user, created = User.objects.get_or_create(phone=phone)
+            user = User.objects.get(phone=phone)
             cache.set(user.phone, code, timeout=settings.REDIS_TIMEOUT)
             print(cache.get(user.phone))
             # TODO send phone code function
