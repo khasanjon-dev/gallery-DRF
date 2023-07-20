@@ -149,7 +149,7 @@ class UserModelViewSet(ModelViewSet):
         }
         return Response(detail)
 
-    @action(methods=['post'], detail=False, permission_classes=(AllowAny,),
+    @action(methods=['post'], detail=False, permission_classes=(IsAuthenticated,),
             serializer_class=CodeSendResetPasswordSerializer)
     def reset_password_send_code(self, request):
         """
@@ -183,7 +183,8 @@ class UserModelViewSet(ModelViewSet):
         }
         return Response(detail)
 
-    @action(methods=['post'], detail=False, permission_classes=(AllowAny,), serializer_class=PasswordResetSerializer)
+    @action(methods=['post'], detail=False, permission_classes=(IsAuthenticated, IsOwner),
+            serializer_class=PasswordResetSerializer)
     def reset_password(self, request):
         """
         ## parol tiklashdan oldin quyidagi apilarga so'rov yuborish kerak
@@ -198,7 +199,4 @@ class UserModelViewSet(ModelViewSet):
         """
         serializer = PasswordResetSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        detail = {
-            'message': 'Password successfully changed!'
-        }
-        return Response(detail)
+        return Response(serializer.data)
