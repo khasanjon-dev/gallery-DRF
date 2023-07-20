@@ -63,18 +63,18 @@ def register(api_client, phone_fixture, send_code, check_code):
 
 
 @pytest.fixture(scope="function")
-def login(api_client, register, phone_fixture):
+def login(register, api_client):
     url = reverse_lazy('login')
-    password = register['password']
     payload = {
-        "phone": phone_fixture,
-        "password": password
+        'phone': register['phone'],
+        'password': register['password']
     }
     response = api_client.post(url, payload)
     assert response.status_code == 200
-    assert response.data['access']
-    assert response.data['refresh']
-    return response.data
+    access = response.data['access']
+    api_client.credentials(HTTP_AUTHORIZATION=f"Bearer {access}")
+    data = response.data
+    return data
 
 
 @pytest.fixture(scope="function")
