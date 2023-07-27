@@ -1,11 +1,16 @@
-from django.db.models import Model, CharField, FileField, DateTimeField, ForeignKey, CASCADE
+from django.db.models import Model, FileField, DateTimeField, ForeignKey, CASCADE, TextField
+
+from utils.validatiors import custom_upload_to
 
 
 class Gallery(Model):
-    name = CharField(max_length=255)
-    file = FileField(upload_to='gallery')
+    description = TextField(max_length=2000)
+    file = FileField(upload_to=custom_upload_to)
     updated_at = DateTimeField(auto_now=True, null=True)
     created_at = DateTimeField(auto_now_add=True)
 
     # relationship
     category = ForeignKey('Category', CASCADE)
+
+    def __str__(self):
+        return self.description

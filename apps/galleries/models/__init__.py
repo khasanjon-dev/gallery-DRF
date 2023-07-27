@@ -1,2 +1,2 @@
 from .gallery import Gallery
-from .category import Category
+from .category import Category, UserCategory

@@ -8,7 +8,6 @@ class CustomUserManager(BaseUserManager):
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
-        email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.password = make_password(password)
         user.is_active = True

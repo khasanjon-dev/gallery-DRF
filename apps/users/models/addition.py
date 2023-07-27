@@ -10,7 +10,3 @@ class Favorite(Model):
     author = ForeignKey(User, CASCADE)
 
 
-class UserCategory(Model):
-    # relationship
-    user = ForeignKey(User, CASCADE)
-    category = ForeignKey(Category, CASCADE)
