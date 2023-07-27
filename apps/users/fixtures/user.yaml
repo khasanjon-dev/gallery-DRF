@@ -6,10 +6,10 @@
     last_name: Mamadaliyev
     email: khasanjon.eng@gmail.com
     phone: 998901001010
-    is_staff: true
+    is_staff: false
     is_active: true
-    is_superuser: true
-    password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    is_superuser: false
+    password: pbkdf2_sha256$600000$BRUjxiBVMInSar2WhHoFnk$ac/9biyDVGfXqers27Y1nb+k5QgW/H+cW8eZrTDR5mA=
     created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
@@ -23,7 +23,7 @@
     is_staff: false
     is_active: true
     is_superuser: false
-    password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    password: pbkdf2_sha256$600000$BRUjxiBVMInSar2WhHoFnk$ac/9biyDVGfXqers27Y1nb+k5QgW/H+cW8eZrTDR5mA=
     created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
@@ -37,7 +37,7 @@
     is_staff: false
     is_active: true
     is_superuser: false
-    password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    password: pbkdf2_sha256$600000$BRUjxiBVMInSar2WhHoFnk$ac/9biyDVGfXqers27Y1nb+k5QgW/H+cW8eZrTDR5mA=
     created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
@@ -51,7 +51,7 @@
     is_staff: false
     is_active: true
     is_superuser: false
-    password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    password: pbkdf2_sha256$600000$BRUjxiBVMInSar2WhHoFnk$ac/9biyDVGfXqers27Y1nb+k5QgW/H+cW8eZrTDR5mA=
     created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
@@ -65,7 +65,7 @@
     is_staff: false
     is_active: true
     is_superuser: false
-    password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    password: pbkdf2_sha256$600000$BRUjxiBVMInSar2WhHoFnk$ac/9biyDVGfXqers27Y1nb+k5QgW/H+cW8eZrTDR5mA=
     created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
@@ -79,7 +79,7 @@
     is_staff: false
     is_active: true
     is_superuser: false
-    password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    password: pbkdf2_sha256$600000$BRUjxiBVMInSar2WhHoFnk$ac/9biyDVGfXqers27Y1nb+k5QgW/H+cW8eZrTDR5mA=
     created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
@@ -93,7 +93,7 @@
     is_staff: false
     is_active: true
     is_superuser: false
-    password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    password: pbkdf2_sha256$600000$BRUjxiBVMInSar2WhHoFnk$ac/9biyDVGfXqers27Y1nb+k5QgW/H+cW8eZrTDR5mA=
     created_at: 2023-07-20 09:44:24.126695 +00:00
 
 
@@ -109,7 +109,7 @@
     is_staff: false
     is_active: true
     is_superuser: false
-    password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    password: pbkdf2_sha256$600000$BRUjxiBVMInSar2WhHoFnk$ac/9biyDVGfXqers27Y1nb+k5QgW/H+cW8eZrTDR5mA=
     created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
@@ -123,7 +123,7 @@
     is_staff: false
     is_active: true
     is_superuser: false
-    password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    password: pbkdf2_sha256$600000$BRUjxiBVMInSar2WhHoFnk$ac/9biyDVGfXqers27Y1nb+k5QgW/H+cW8eZrTDR5mA=
     created_at: 2023-07-20 09:44:24.126695 +00:00
 
 - model: users.user
@@ -137,5 +137,5 @@
     is_staff: false
     is_active: true
     is_superuser: false
-    password: pbkdf2_sha256$600000$zXCLWaOrNHYeJzZyzLW0lM$s2pcQL5KfksUQMEOSDtVn9Oxx93JaOAMWO7PeqVeczE=
+    password: pbkdf2_sha256$600000$BRUjxiBVMInSar2WhHoFnk$ac/9biyDVGfXqers27Y1nb+k5QgW/H+cW8eZrTDR5mA=
     created_at: 2023-07-20 09:44:24.126695 +00:00

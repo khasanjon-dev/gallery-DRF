@@ -18,7 +18,7 @@ class UserModelViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwner]
-    ordering = ['-date_joined']
+    ordering = ['-date_joined', '-updated_at']
 
     def get_serializer_class(self):
         if self.action in ['update', 'partial_update']:
