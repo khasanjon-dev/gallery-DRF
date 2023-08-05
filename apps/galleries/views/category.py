@@ -1,12 +1,18 @@
+from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.viewsets import ModelViewSet
 
 from galleries.models import Category
-from galleries.serializers.category import CategoryModelSerializer
+from galleries.serializers.category import CategoryCreateModelSerializer, CategoryListModelSerializer
 from shared.django_restframework.permission import IsOwner
 
 
-class CategoryModelViewSet(ModelViewSet):
+class CategoryCreateAPIView(CreateAPIView):
     queryset = Category.objects.all()
-    serializer_class = CategoryModelSerializer
-    permission_classes = (IsOwner, IsAuthenticated)
+    serializer_class = CategoryCreateModelSerializer
+    permission_classes = (IsAuthenticated,)
+
+
+class CategoryListAPIView(ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategoryListModelSerializer
+    permission_classes = (IsAuthenticated, IsOwner)

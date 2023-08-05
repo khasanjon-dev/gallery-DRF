@@ -1,22 +1,32 @@
+from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer
 
 from galleries.models import Category
 
 
-class CategoryModelSerializer(ModelSerializer):
+class CategoryCreateModelSerializer(ModelSerializer):
     class Meta:
         model = Category
-        # fields = '__all__'
         exclude = ('author',)
 
     def validate(self, attrs):
         request = self.context['request']
-        attrs['author'] = request.user
+        author = attrs['author'] = request.user
+        name = attrs['name']
+        user_id = attrs['user'][0]
+        if Category.objects.filter(author__category__author_id=author.id, name=name,
+                                   user__categories__user__=user_id).exists():
+            raise ValidationError('Sizda bunday kategoriya allaqachon mavjud !')
+
         return attrs
 
-    def to_representation(self, instance):
-        rep = super().to_representation(instance)
-        request = self.context['request']
-        rep['author'] = request.user
 
-        return rep
+class CategoryListModelSerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+    def validate(self, attrs):
+        request = self.context['request']
+        # if Category.objects.filter(author__category__author_id=request.user.id).exists():
+        #     Category.objects.
