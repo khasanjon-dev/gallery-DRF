@@ -6,10 +6,9 @@ from users.models import User
 class Category(Model):
     name = CharField(max_length=250)
     author = ForeignKey(User, CASCADE)
-    user = ForeignKey(User, SET_NULL)
 
     class Meta:
-        unique_together = ('name', 'author', 'user')
+        unique_together = ('name', 'author')
 
     def __str__(self):
         return self.name

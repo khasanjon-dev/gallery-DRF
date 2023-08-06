@@ -53,3 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
     USERNAME_FIELD = 'phone'
+
+    @property
+    def user_category(self):
+        return self.category_set.all()
