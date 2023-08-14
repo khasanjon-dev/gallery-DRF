@@ -5,7 +5,7 @@ from users.models import User
 
 class Category(Model):
     name = CharField(max_length=250)
-    author = ForeignKey(User, CASCADE)
+    author = ForeignKey(User, CASCADE, related_name='category')
 
     class Meta:
         unique_together = ('name', 'author')

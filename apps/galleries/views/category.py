@@ -1,18 +1,15 @@
-from rest_framework.generics import CreateAPIView, ListAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import action
+from rest_framework.viewsets import ModelViewSet
 
 from galleries.models import Category
-from galleries.serializers.category import CategoryCreateModelSerializer, CategoryListModelSerializer
-from shared.django_restframework.permission import IsOwner
 
 
-class CategoryCreateAPIView(CreateAPIView):
+class CategoryModelViewSet(ModelViewSet):
     queryset = Category.objects.all()
-    serializer_class = CategoryCreateModelSerializer
-    permission_classes = (IsAuthenticated,)
+    serializer_class = Category
 
-
-class CategoryListAPIView(ListAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategoryListModelSerializer
-    permission_classes = (IsAuthenticated, IsOwner)
+    # @action(methods=['get'], detail=False, serializer_class=)
+    # def get_category(self, request):
+    #     """
+    #     ## userning categoriya listini olish
+    #     """

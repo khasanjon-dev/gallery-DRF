@@ -56,4 +56,4 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @property
     def user_category(self):
-        return self.category_set.all()
+        return self.category.obj.all()
