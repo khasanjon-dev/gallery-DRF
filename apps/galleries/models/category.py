@@ -1,4 +1,4 @@
-from django.db.models import Model, CharField, ForeignKey, CASCADE, SET_NULL
+from django.db.models import Model, CharField, ForeignKey, CASCADE
 
 from users.models import User
 

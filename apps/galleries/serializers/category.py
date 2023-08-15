@@ -1,6 +1,7 @@
+from rest_framework.fields import HiddenField, CurrentUserDefault
 from rest_framework.serializers import ModelSerializer
 
-from galleries.models import Category, UserCategory
+from galleries.models import Category
 
 
 # class CategoryCreateModelSerializer(ModelSerializer):
@@ -26,13 +27,15 @@ from galleries.models import Category, UserCategory
 #         fields = '__all__'
 
 
-class CategoryModelSerializer(ModelSerializer):
+class CategoryCreateModelSerializer(ModelSerializer):
+    author = HiddenField(default=CurrentUserDefault())
+
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ('name', 'author')
 
 
-class UserCategoryModelSerializer(ModelSerializer):
+class CategoryListModelSerializer(ModelSerializer):
     class Meta:
-        model = UserCategory
-        fields = '__all__'
+        model = Category
+        fields = ('name', 'author')
