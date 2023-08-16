@@ -38,4 +38,16 @@ class CategoryCreateModelSerializer(ModelSerializer):
 class CategoryListModelSerializer(ModelSerializer):
     class Meta:
         model = Category
+        fields = ('id', 'name', 'author')
+
+
+class CategoryUpdateModelSerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('name', 'author')
+
+
+class CategoryRetrieveModelSerializer(ModelSerializer):
+    class Meta:
+        model = Category
         fields = ('name', 'author')
