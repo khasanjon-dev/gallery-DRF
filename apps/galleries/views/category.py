@@ -1,18 +1,17 @@
-from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 
 from galleries.models import Category
-from galleries.serializers.category import CategoryCreateModelSerializer, CategoryListModelSerializer, \
-    CategoryUpdateModelSerializer, CategoryRetrieveModelSerializer
+from galleries.serializers.category import CategoryCreateSerializer, CategoryListRetrieveUpdateSerializer
 
 
 class CategoryCreateAPIView(CreateAPIView):
     queryset = Category.objects.all()
-    serializer_class = CategoryCreateModelSerializer
+    serializer_class = CategoryCreateSerializer
 
 
 class CategoryListAPIView(ListAPIView):
     queryset = Category.objects.all()
-    serializer_class = CategoryListModelSerializer
+    serializer_class = CategoryListRetrieveUpdateSerializer
 
     def get_queryset(self):
         user = self.request.user
@@ -20,16 +19,11 @@ class CategoryListAPIView(ListAPIView):
         return category
 
 
-class CategoryRetrieveAPIView(RetrieveAPIView):
+class CategoryRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
-    serializer_class = CategoryRetrieveModelSerializer
+    serializer_class = CategoryListRetrieveUpdateSerializer
 
     def get_queryset(self):
         user = self.request.user
         category = Category.objects.filter(author_id=user.id)
         return category
-
-
-class CategoryUpdateAPIView(UpdateAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategoryUpdateModelSerializer
