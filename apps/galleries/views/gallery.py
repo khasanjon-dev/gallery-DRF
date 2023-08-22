@@ -1,12 +1,17 @@
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.generics import CreateAPIView
 from rest_framework.viewsets import ModelViewSet
 
 from galleries.models import Gallery
-from galleries.serializers.gallery import GalleryModelSerializer
-from shared.django_restframework.permission import IsOwner
+from galleries.serializers.gallery import GalleryModelSerializer, GalleryCreateSerializer
 
 
 class GalleryModelViewSet(ModelViewSet):
     queryset = Gallery.objects.all()
     serializer_class = GalleryModelSerializer
-    permission_classes = (IsOwner, IsAuthenticatedOrReadOnly)
+
+
+class GalleryCreateAPIView(CreateAPIView):
+    queryset = Gallery.objects.all()
+    serializer_class = GalleryCreateSerializer
+
+

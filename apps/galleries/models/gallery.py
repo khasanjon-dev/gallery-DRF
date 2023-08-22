@@ -1,5 +1,6 @@
 from django.db.models import Model, FileField, DateTimeField, ForeignKey, CASCADE, TextField
 
+from users.models import User
 from utils.validatiors import custom_upload_to
 
 
@@ -11,6 +12,7 @@ class Gallery(Model):
 
     # relationship
     category = ForeignKey('Category', CASCADE)
+    author = ForeignKey(User, CASCADE)
 
     def __str__(self):
         return self.description
