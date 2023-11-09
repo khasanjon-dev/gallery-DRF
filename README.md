@@ -1,3 +1,4 @@
+## It is being developed and you can see it with fronted soon
 # gallery
 
 **Need .env file variables**
